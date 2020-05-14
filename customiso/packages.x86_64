@@ -8,14 +8,12 @@ crda
 darkhttpd
 ddrescue
 dhclient
-dhcpcd
 dialog
 diffutils
 dmraid
 dnsmasq
 dnsutils
 dosfstools
-elinks
 ethtool
 exfat-utils
 f2fs-tools
@@ -68,8 +66,6 @@ tcpdump
 testdisk
 usb_modeswitch
 usbutils
-vi
-vim-minimal
 vpnc
 wget
 wireless-regdb
@@ -88,8 +84,8 @@ xorg-xrandr
 xorg-xrdb
 xorg-xfd
 
-# Intel Drivers
-xf86-video-intel
+# AMD Drivers
+xf86-video-mesa
 
 # Networking
 modemmanager
@@ -98,32 +94,10 @@ networkmanager
 network-manager-applet
 usb_modeswitch
 
-# LXDE
-leafpad
-lxappearance
-lxappearance-obconf
-lxde-common
-lxdm
-lxmusic
-lxpanel
-lxrandr
-lxsession
-lxtask
-lxterminal
-pcmanfm
-adapta-gtk-theme
-papirus-icon-theme
-
-# I3
-i3-wm
-i3status
-noto-fonts
-
-# Openbox
-obconf
-openbox
-arc-gtk-theme
-arc-icon-theme
+# plasma
+plasma
+plasma-wayland-session
+sddm
 
 # Programs
 alsa-plugins
@@ -139,11 +113,8 @@ cmatrix
 cowsay
 dunst
 fakeroot
-feh
 ffmpegthumbnailer
 file-roller
-firefox
-fish
 gcc
 geany
 git
@@ -159,13 +130,9 @@ htop
 imagemagick
 inetutils
 make
-mpc
-mpd
-mplayer
 ncdu
 ncmpcpp
 neofetch
-nitrogen
 nmon
 os-prober
 p7zip
@@ -178,27 +145,13 @@ pulseaudio
 pulseaudio-alsa
 pulseaudio-equalizer
 pv
-ranger
-rofi
-scrot
-termite
-thunar
-thunar-archive-plugin
-thunar-media-tags-plugin
-thunar-volman
 ttf-dejavu
-tumbler
 udisks2
 unrar
 unzip
 viewnior
 vim
-w3m
 xdg-user-dirs
-xfce4-power-manager
-xfce4-settings
-xfce4-terminal
-xterm
 zenity
 
 ## Virtual Box
@@ -207,14 +160,11 @@ virtualbox-guest-utils
 linux-headers
 
 ## AUR
-aurafetch-git
-compton-tryone-git
-i3lock-fancier-git
-ksuperkey
-networkmanager-dmenu-git
-obmenu-generator
-perl-linux-desktopfiles
 plymouth
-polybar
-rxvt-unicode-pixbuf
 yay
+rtl8821ce-dkms-git
+atom-editor-beta-bin
+code-git
+pycharm-professional
+discord
+
