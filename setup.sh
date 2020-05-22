@@ -16,8 +16,7 @@ PKG1="colorpicker"
 PKG2="networkmanager-dmenu-git"
 PKG3="perl-linux-desktopfiles"
 PKG4="plymouth"
-PKG5="polybar"
-PKG6="yay"
+PKG5="yay"
 
 ## Banner
 echo
@@ -59,11 +58,8 @@ echo
 echo -e $Y"[*] Cloning plymouth - "$C
 git clone https://aur.archlinux.org/plymouth.git --depth 1 $PKG4
 echo
-echo -e $Y"[*] Cloning polybar - "$C
-git clone https://aur.archlinux.org/polybar.git --depth 1 $PKG5
-echo
 echo -e $Y"[*] Cloning yay - "$C
-git clone https://aur.archlinux.org/yay.git --depth 1 $PKG6
+git clone https://aur.archlinux.org/yay.git --depth 1 $PKG5
 echo
 echo -e $G"[*] Downloaded Successfully."$C
 echo
@@ -101,15 +97,10 @@ cat >> PKGBUILD <<EOL
 EOL
 makepkg -s
 mv *.pkg.tar.xz ../../localrepo/x86_64
-cd ..
-
-echo -e $Y"[*] Building $PKG8 - "$C
-cd $PKG5 && makepkg -s
-mv *.pkg.tar.xz ../../localrepo/x86_64
-cd ..
+cd ...
 
 echo -e $Y"[*] Building $PKG9 - "$C
-cd $PKG6 && makepkg -s
+cd $PKG5 && makepkg -s
 mv *.pkg.tar.xz ../../localrepo/x86_64
 cd ..
 
@@ -169,7 +160,7 @@ echo
 
 echo -e $Y"[*] Cleaning Up... "$C
 cd $DIR/pkgs
-rm -rf $PKG1 $PKG2 $PKG3 $PKG4 $PKG5 $PKG6
+rm -rf $PKG1 $PKG2 $PKG3 $PKG4 $PKG5
 echo
 echo -e $R"[*] Setup Completed."
 echo
