@@ -29,7 +29,7 @@ systemctl set-default graphical.target
 ## Services
 systemctl enable NetworkManager.service 
 systemctl enable wpa_supplicant.service
-systemctl enable lxdm-plymouth.service
+systemctl enable sddm.service
 
 ## Mods
 sed -i -e 's/MODULES=()/MODULES=(i915)/g' /etc/mkinitcpio.conf
@@ -37,9 +37,6 @@ sed -i -e 's/HOOKS=(base udev autodetect modconf block filesystems keyboard fsck
 #sed -i -e 's/Loading Linux %s .../ /g' /etc/grub.d/10_linux
 #sed -i -e 's/Loading initial ramdisk .../ /g' /etc/grub.d/10_linux
 sed -i -e 's/Inherits=.*/Inherits=Papirus,Adwaita,gnome,hicolor/g' /usr/share/icons/Arc/index.theme
-mv /usr/share/lxde/images/logout-banner.png /usr/share/lxde/images/logout-banner-old.png && cp /usr/share/pixmaps/logout-banner.png /usr/share/lxde/images/logout-banner.png
-rm -rf /usr/share/xsessions/openbox-kde.desktop /usr/share/xsessions/i3-with-shmlog.desktop
-cp /usr/bin/networkmanager_dmenu /usr/local/bin/nmd && sudo sed -i 's/config.ini/config-simple.ini/g' /usr/local/bin/nmd
 
 ## Remove localrepo lines
 sed -i '$d' /etc/pacman.conf && sed -i '$d' /etc/pacman.conf && sed -i '$d' /etc/pacman.conf
