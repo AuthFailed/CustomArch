@@ -13,7 +13,6 @@ dosfstools
 ethtool
 exfat-utils
 f2fs-tools
-fsarchiver
 gpm
 gptfdisk
 grml-zsh-config
@@ -24,9 +23,7 @@ linux-atm
 linux-firmware
 man-db
 man-pages
-mc
 nano
-ndisc6
 nfs-utils
 nmap
 ntfs-3g
@@ -34,14 +31,10 @@ ntp
 openconnect
 openssh
 openvpn
-partclone
 parted
-partimage
 ppp
 refind-efi
 rsync
-sg3_utils
-smartmontools
 sudo
 testdisk
 usb_modeswitch
@@ -62,37 +55,28 @@ xorg-xfd
 
 # AMD Drivers
 xf86-video-mesa
+xf86-video-amdgpu
 
 # Networking
 modemmanager
 mobile-broadband-provider-info
 networkmanager
-network-manager-applet
 usb_modeswitch
 
 # plasma
 plasma
 plasma-wayland-session
 sddm
+sddm-kcm
 
 # Programs
-alsa-plugins
-alsa-tools
-alsa-utils
-atril
 autoconf
 automake
 bind-tools
 binutils
 bmon
-cmatrix
-cowsay
-dunst
 fakeroot
-ffmpegthumbnailer
-file-roller
 gcc
-geany
 git
 gparted
 gtk-engine-murrine
@@ -106,8 +90,6 @@ htop
 imagemagick
 inetutils
 make
-ncdu
-ncmpcpp
 neofetch
 nmon
 os-prober
@@ -124,9 +106,7 @@ pv
 ttf-dejavu
 udisks2
 unrar
-unzip
-viewnior
-vim
+unzipvim
 xdg-user-dirs
 zenity
 
@@ -143,4 +123,3 @@ atom-editor-beta-bin
 code-git
 pycharm-professional
 discord
-
