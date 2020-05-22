@@ -54,7 +54,6 @@ xorg-xrdb
 xorg-xfd
 
 # AMD Drivers
-xf86-video-mesa
 xf86-video-amdgpu
 
 # Networking
@@ -116,10 +115,10 @@ virtualbox-guest-utils
 linux-headers
 
 ## AUR
-plymouth
-yay
-rtl8821ce-dkms-git
-atom-editor-beta-bin
-code-git
-pycharm-professional
-discord
+#plymouth
+#yay
+#rtl8821ce-dkms-git
+#atom-editor-beta-bin
+#code-git
+#pycharm-professional
+#discord
