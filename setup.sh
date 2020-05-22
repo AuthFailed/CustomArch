@@ -12,224 +12,165 @@ W='\033[1;37m'
 Y='\033[1;33m'
 
 DIR="$(pwd)"
-PR1="aurafetch"
-PR2="compton"
-PR3="i3lock"
-PR4="ksuperkey"
-PR5="networkmanager-dmenu"
-PR6="obmenu-generator"
-PR7="perl-linux-desktopfiles"
-PR8="polybar"
-PR9="rxvt-unicode-pixbuf"
-PR10="yay"
-PR11="plymouth"
+PKG1="colorpicker"
+PKG2="networkmanager-dmenu-git"
+PKG3="perl-linux-desktopfiles"
+PKG4="plymouth"
+PKG5="polybar"
+PKG6="yay"
 
 ## Banner
 echo
-echo -e $B" ┌──────────────────────────────────┐"
-echo -e $B" │   $R┏━┓┏━┓┏━╸╻ ╻   ╻  ╻┏┓╻╻ ╻╻ ╻   $B│"
-echo -e $B" │   $R┣━┫┣┳┛┃  ┣━┫   ┃  ┃┃┗┫┃ ┃┏╋┛   $B│"
-echo -e $B" │   $R╹ ╹╹┗╸┗━╸╹ ╹   ┗━╸╹╹ ╹┗━┛╹ ╹   $B│"
-echo -e $B" └──────────────────────────────────┘"
-echo -e $W"  By:$C Aditya Shakya"
-echo -e $W"  Github:$C @adi1090x"
-echo -e $W"  Reddit:$C @adi1090x"
+echo -e $B"┌──────────────────────────────────┐"
+echo -e $B"│   $R┏━┓┏━┓┏━╸╻ ╻   ╻  ╻┏┓╻╻ ╻╻ ╻   $B│"
+echo -e $B"│   $R┣━┫┣┳┛┃  ┣━┫   ┃  ┃┃┗┫┃ ┃┏╋┛   $B│"
+echo -e $B"│   $R╹ ╹╹┗╸┗━╸╹ ╹   ┗━╸╹╹ ╹┗━┛╹ ╹   $B│"
+echo -e $B"└──────────────────────────────────┘"
 echo
 
 ## Setting Things Up
 echo
-echo -e $Y" [*] Installing Dependencies - "$C
+echo -e $Y"[*] Installing Dependencies - "$C
 echo
 sudo pacman -Sy git archiso --noconfirm
 echo
-echo -e $G" [*] Succesfully Installed."$C
+echo -e $G"[*] Succesfully Installed."$C
 echo
-echo -e $Y" [*] Modifying /usr/bin/mkarchiso - "$C
+echo -e $Y"[*] Modifying /usr/bin/mkarchiso - "$C
 sudo cp /usr/bin/mkarchiso{,.bak} && sudo sed -i -e 's/-c -G -M/-i -c -G -M/g' /usr/bin/mkarchiso
 echo
-echo -e $G" [*] Succesfully Modified."$C
+echo -e $G"[*] Succesfully Modified."$C
 echo
 
 ## Cloning AUR Packages
 cd $DIR/pkgs
 
-echo -e $Y" [*] Downloading AUR Packages - "$C
+echo -e $Y"[*] Downloading AUR Packages - "$C
 echo
-echo -e $Y" [*] Cloning aurafetch-git - "$C
-git clone https://aur.archlinux.org/aurafetch-git.git --depth 1 $PR1
+echo -e $Y"[*] Cloning colorpicker - "$C
+git clone https://aur.archlinux.org/colorpicker.git --depth 1 $PKG1
 echo
-echo -e $Y" [*] Cloning compton-tryone-git - "$C
-git clone https://aur.archlinux.org/compton-tryone-git.git --depth 1 $PR2
+echo -e $Y"[*] Cloning networkmanager-dmenu-git - "$C
+git clone https://aur.archlinux.org/networkmanager-dmenu-git.git --depth 1 $PKG2
 echo
-echo -e $Y" [*] Cloning i3lock-fancier-git - "$C
-git clone https://aur.archlinux.org/i3lock-fancier-git.git --depth 1 $PR3
-echo
-echo -e $Y" [*] Cloning ksuperkey - "$C
-git clone https://aur.archlinux.org/ksuperkey.git --depth 1 $PR4
-echo
-echo -e $Y" [*] Cloning networkmanager-dmenu-git - "$C
-git clone https://aur.archlinux.org/networkmanager-dmenu-git.git --depth 1 $PR5
-echo
-echo -e $Y" [*] Cloning obmenu-generator - "$C
-git clone https://aur.archlinux.org/obmenu-generator.git --depth 1 $PR6
-echo
-echo -e $Y" [*] Cloning perl-linux-desktopfiles - "$C
-git clone https://aur.archlinux.org/perl-linux-desktopfiles.git --depth 1 $PR7
+echo -e $Y"[*] Cloning perl-linux-desktopfiles - "$C
+git clone https://aur.archlinux.org/perl-linux-desktopfiles.git --depth 1 $PKG3
 echo
 echo -e $Y"[*] Cloning plymouth - "$C
-git clone https://aur.archlinux.org/plymouth.git --depth 1 $PR11
+git clone https://aur.archlinux.org/plymouth.git --depth 1 $PKG4
 echo
-echo -e $Y" [*] Cloning polybar - "$C
-git clone https://aur.archlinux.org/polybar.git --depth 1 $PR8
+echo -e $Y"[*] Cloning polybar - "$C
+git clone https://aur.archlinux.org/polybar.git --depth 1 $PKG5
 echo
-echo -e $Y" [*] Cloning rxvt-unicode-pixbuf - "$C
-git clone https://aur.archlinux.org/rxvt-unicode-pixbuf.git --depth 1 $PR9
+echo -e $Y"[*] Cloning yay - "$C
+git clone https://aur.archlinux.org/yay.git --depth 1 $PKG6
 echo
-echo -e $Y" [*] Cloning yay - "$C
-git clone https://aur.archlinux.org/yay.git --depth 1 $PR10
-echo
-echo -e $G" [*] Downloaded Successfully."$C
+echo -e $G"[*] Downloaded Successfully."$C
 echo
 
 ## Building AUR Packages
 mkdir -p ../localrepo/i686 ../localrepo/x86_64
 
-echo -e $Y" [*] Building AUR Packages - "$C
+echo -e $Y"[*] Building AUR Packages - "$C
 echo
-echo -e $Y" [*] Building $PR1 - "$C
-cd $PR1 && makepkg -s
+
+echo -e $Y"[*] Building $PKG1 - "$C
+cd $PKG1 && makepkg -s
 mv *.pkg.tar.xz ../../localrepo/x86_64
 cd ..
 
-echo -e $Y" [*] Building $PR2 - "$C
-cd $PR2 && makepkg -s
+echo -e $Y"[*] Building $PKG4 - "$C
+cd $PKG2 && makepkg -s
 mv *.pkg.tar.xz ../../localrepo/x86_64
 cd ..
 
-echo -e $Y" [*] Building $PR3 - "$C
-cd $PR3 && makepkg -s
+echo -e $Y"[*] Building $PKG6 - "$C
+cd $PKG3 && makepkg -s
 mv *.pkg.tar.xz ../../localrepo/x86_64
 cd ..
 
-echo -e $Y" [*] Building $PR4 - "$C
-cd $PR4 && makepkg -s
-mv *.pkg.tar.xz ../../localrepo/x86_64
-cd ..
-
-echo -e $Y" [*] Building $PR5 - "$C
-cd $PR5 && makepkg -s
-mv *.pkg.tar.xz ../../localrepo/x86_64
-cd ..
-
-echo -e $Y" [*] Building $PR6 - "$C
-cd $PR6 && makepkg -s
-mv *.pkg.tar.xz ../../localrepo/x86_64
-cd ..
-
-echo -e $Y" [*] Building $PR7 - "$C
-cd $PR7 && makepkg -s
-mv *.pkg.tar.xz ../../localrepo/x86_64
-cd ..
-
-echo -e $Y" [*] Building $PR8 - "$C
-cd $PR8 && makepkg -s
-mv *.pkg.tar.xz ../../localrepo/x86_64
-cd ..
-
-echo -e $Y" [*] Building $PR9 - "$C
-cd $PR9 && makepkg -s
-mv *.pkg.tar.xz ../../localrepo/x86_64
-cd ..
-
-echo -e $Y" [*] Building $PR10 - "$C
-cd $PR10 && makepkg -s
-mv *.pkg.tar.xz ../../localrepo/x86_64
-cd ..
-
-echo -e $Y"[*] Building $PR11 - "$C
-cd $PR11
-cp -r $DIR/pkgs/beat $DIR/pkgs/plymouth
+echo -e $Y"[*] Building $PKG7 - "$C
+cd $PKG4
+cp -r $DIR/pkgs/miniloop $DIR/pkgs/plymouth
 sed -i '$d' PKGBUILD
 cat >> PKGBUILD <<EOL
-  sed -i -e 's/Theme=.*/Theme=beat/g' \$pkgdir/etc/plymouth/plymouthd.conf
+  sed -i -e 's/Theme=.*/Theme=miniloop/g' \$pkgdir/etc/plymouth/plymouthd.conf
   sed -i -e 's/ShowDelay=.*/ShowDelay=1/g' \$pkgdir/etc/plymouth/plymouthd.conf
-  cp -r ../../beat \$pkgdir/usr/share/plymouth/themes
+  cp -r ../../miniloop \$pkgdir/usr/share/plymouth/themes
 }
 EOL
-sum1=$(md5sum lxdm-plymouth.service |  awk -F ' ' '{print $1}')
-cat > lxdm-plymouth.service <<EOL
-[Unit]
-Description=LXDE Display Manager
-Conflicts=getty@tty1.service
-After=systemd-user-sessions.service getty@tty1.service plymouth-quit.service
-
-[Service]
-ExecStart=/usr/sbin/lxdm
-Restart=always
-IgnoreSIGPIPE=no
-
-[Install]
-Alias=display-manager.service
-EOL
-sum2=$(md5sum lxdm-plymouth.service |  awk -F ' ' '{print $1}')
-sed -i -e "s/$sum1/$sum2/g" PKGBUILD
 makepkg -s
 mv *.pkg.tar.xz ../../localrepo/x86_64
 cd ..
 
+echo -e $Y"[*] Building $PKG8 - "$C
+cd $PKG5 && makepkg -s
+mv *.pkg.tar.xz ../../localrepo/x86_64
+cd ..
+
+echo -e $Y"[*] Building $PKG9 - "$C
+cd $PKG6 && makepkg -s
+mv *.pkg.tar.xz ../../localrepo/x86_64
+cd ..
+
 echo
-echo -e $G" [*] All Packages Builted Successfully."$C
+echo -e $G"[*] All Packages Builted Successfully."$C
 echo
 
 ## Setting up LocalRepo
 cd $DIR/localrepo/x86_64
-echo -e $Y" [*] Setting Up Local Repository - "$C
+echo -e $Y"[*] Setting Up Local Repository - "$C
 echo
 repo-add localrepo.db.tar.gz *
 echo
-echo -e $Y" [*] Appending Repo Config in Pacman file - "$C
+echo -e $Y"[*] Appending Repo Config in Pacman file - "$C
 echo
-echo "[localrepo]" >> $DIR/customiso/pacman.conf
-echo "SigLevel = Optional TrustAll" >> $DIR/customiso/pacman.conf
-echo "Server = file://$DIR/localrepo/\$arch" >> $DIR/customiso/pacman.conf
-echo
-
-## Optional
-echo -e $Y" [*] Do you want EDEX-UI in the ISO? (Y/N)"$C
-read answer
-if [ $answer = "Y" ] || [ $answer = "y" ];
-then
-echo
-echo -e $Y" [*] Alright, Setting up edex-ui... "$C
-echo
-cd $DIR/customiso/airootfs && mkdir opt && cd opt
-wget https://github.com/GitSquared/edex-ui/releases/download/v2.2.2/eDEX-UI.Linux.x86_64.AppImage
-chmod 644 eDEX-UI.Linux.x86_64.AppImage && chmod +x eDEX-UI.Linux.x86_64.AppImage
-cat > $DIR/customiso/airootfs/usr/share/applications/eDEX-UI.desktop <<- EOF
-[Desktop Entry]
-Name=eDEX-UI
-Comment=eDEX-UI sci-fi interface
-Exec="/opt/eDEX-UI.Linux.x86_64.AppImage"
-Terminal=false
-Type=Application
-Icon=edex-ui
-StartupWMClass=eDEX-UI
-Categories=System;
-EOF
-echo
-echo -e $Y" [*] eDEX-UI Added. "$C
-echo
-fi
-
-echo
-echo -e $Y" [*] Making owner ROOT to avoid problems with false permissions."$C
-sudo chown -R root:root $DIR/customiso/
+echo "[localrepo]" >> $DIR/iso/pacman.conf
+echo "SigLevel = Optional TrustAll" >> $DIR/iso/pacman.conf
+echo "Server = file://$DIR/localrepo/\$arch" >> $DIR/iso/pacman.conf
 echo
 
-echo -e $Y" [*] Cleaning Up... "$C
+## Setting up oh-my-zsh
+echo -e $Y"[*] Setting Up Oh-My-Zsh - "$C
+echo
+cd $DIR/iso/airootfs/etc/skel && git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 .oh-my-zsh
+cp $DIR/pkgs/agnoster_alt.zsh-theme $DIR/iso/airootfs/etc/skel/.oh-my-zsh/custom/themes
+cp $DIR/iso/airootfs/etc/skel/.oh-my-zsh/templates/zshrc.zsh-template $DIR/iso/airootfs/etc/skel/.zshrc
+sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="agnoster_alt"/g' $DIR/iso/airootfs/etc/skel/.zshrc
+cat >> $DIR/iso/airootfs/etc/skel/.zshrc <<EOL
+# omz
+alias zshconfig="geany ~/.zshrc"
+alias ohmyzsh="thunar ~/.oh-my-zsh"
+
+# ls
+alias l='ls -lh'
+alias ll='ls -lah'
+alias la='ls -A'
+alias lm='ls -m'
+alias lr='ls -R'
+alias lg='ls -l --group-directories-first'
+
+# git
+alias gcl='git clone --depth 1'
+alias gi='git init'
+alias ga='git add'
+alias gc='git commit -m'
+alias gp='git push origin master'
+EOL
+cp -r $DIR/iso/airootfs/etc/skel/.oh-my-zsh $DIR/iso/airootfs/root && cp $DIR/iso/airootfs/etc/skel/.zshrc $DIR/iso/airootfs/root
+echo
+echo -e $R"[*] Done."
+echo
+
+## Changing ownership to root to avoid false permissions error
+echo -e $Y"[*] Making owner ROOT to avoid problems with false permissions."$C
+sudo chown -R root:root $DIR/iso/
+echo
+
+echo -e $Y"[*] Cleaning Up... "$C
 cd $DIR/pkgs
-rm -rf $PR1 $PR2 $PR3 $PR4 $PR5 $PR6 $PR7 $PR8 $PR9 $PR10 $PR11
+rm -rf $PKG1 $PKG2 $PKG3 $PKG4 $PKG5 $PKG6
 echo
-echo -e $R" [*] Setup Completed."
+echo -e $R"[*] Setup Completed."
 echo
 exit
