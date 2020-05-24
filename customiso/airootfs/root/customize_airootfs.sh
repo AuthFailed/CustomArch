@@ -7,11 +7,11 @@ locale-gen
 
 ln -sf /usr/share/zoneinfo/UTC /etc/localtime
 
-usermod -s /usr/bin/fish root
+usermod -s /usr/bin/zsh root
 #cp -aT /etc/skel/ /root/
 
 ## Liveuser
-useradd -m -p $(openssl passwd liveuser) -g users -G "adm,audio,floppy,log,network,rfkill,scanner,storage,optical,power,wheel" -s /bin/fish liveuser
+useradd -m -p $(openssl passwd liveuser) -g users -G "adm,audio,floppy,log,network,rfkill,scanner,storage,optical,power,wheel" -s /bin/zsh liveuser
 chown -R liveuser:users /home/liveuser
 #chmod 700 /root
 
