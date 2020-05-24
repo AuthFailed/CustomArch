@@ -13,10 +13,8 @@ Y='\033[1;33m'
 
 DIR="$(pwd)"
 PKG1="colorpicker"
-PKG2="networkmanager-dmenu-git"
-PKG3="perl-linux-desktopfiles"
-PKG4="plymouth"
-PKG5="yay"
+PKG2="yay"
+PKG3="plymouth"
 
 ## Banner
 echo
@@ -49,17 +47,11 @@ echo
 echo -e $Y"[*] Cloning colorpicker - "$C
 git clone https://aur.archlinux.org/colorpicker.git --depth 1 $PKG1
 echo
-echo -e $Y"[*] Cloning networkmanager-dmenu-git - "$C
-git clone https://aur.archlinux.org/networkmanager-dmenu-git.git --depth 1 $PKG2
-echo
-echo -e $Y"[*] Cloning perl-linux-desktopfiles - "$C
-git clone https://aur.archlinux.org/perl-linux-desktopfiles.git --depth 1 $PKG3
+echo -e $Y"[*] Cloning yay - "$C
+git clone https://aur.archlinux.org/yay.git --depth 1 $PKG2
 echo
 echo -e $Y"[*] Cloning plymouth - "$C
-git clone https://aur.archlinux.org/plymouth.git --depth 1 $PKG4
-echo
-echo -e $Y"[*] Cloning yay - "$C
-git clone https://aur.archlinux.org/yay.git --depth 1 $PKG5
+git clone https://aur.archlinux.org/plymouth.git --depth 1 $PKG3
 echo
 echo -e $G"[*] Downloaded Successfully."$C
 echo
@@ -75,32 +67,40 @@ cd $PKG1 && makepkg -s
 mv *.pkg.tar.xz ../../localrepo/x86_64
 cd ..
 
-echo -e $Y"[*] Building $PKG4 - "$C
-cd $PKG2 && makepkg -s
+echo -e $Y"[*] Building $PKG2 - "$C
+cd $PKG2 && makepkg -si
 mv *.pkg.tar.xz ../../localrepo/x86_64
 cd ..
 
-echo -e $Y"[*] Building $PKG6 - "$C
-cd $PKG3 && makepkg -s
-mv *.pkg.tar.xz ../../localrepo/x86_64
-cd ..
-
-echo -e $Y"[*] Building $PKG7 - "$C
-cd $PKG4
-cp -r $DIR/pkgs/miniloop $DIR/pkgs/plymouth
+echo -e $Y"[*] Building $PKG3 - "$C
+cd $PKG3
+cp -r $DIR/pkgs/beat $DIR/pkgs/plymouth
 sed -i '$d' PKGBUILD
 cat >> PKGBUILD <<EOL
-  sed -i -e 's/Theme=.*/Theme=miniloop/g' \$pkgdir/etc/plymouth/plymouthd.conf
+  sed -i -e 's/Theme=.*/Theme=beat/g' \$pkgdir/etc/plymouth/plymouthd.conf
   sed -i -e 's/ShowDelay=.*/ShowDelay=1/g' \$pkgdir/etc/plymouth/plymouthd.conf
-  cp -r ../../miniloop \$pkgdir/usr/share/plymouth/themes
+  cp -r ../../beat \$pkgdir/usr/share/plymouth/themes
 }
-EOL
-makepkg -s
-mv *.pkg.tar.xz ../../localrepo/x86_64
-cd ...
+EOL 
+sum1=$(md5sum sddm-plymouth.service |  awk -F ' ' '{print $1}')
+cat > sddm-plymouth.service <<EOL
+[Unit]
+Description=Simple Desktop Display Manager
+Documentation=man:sddm(1) man:sddm.conf(5)
+Conflicts=getty@tty1.service
+Wants=plymouth-deactivate.service
+After=systemd-user-sessions.service getty@tty1.service plymouth-deactivate.service plymouth-quit.service systemd-logind.service
 
-echo -e $Y"[*] Building $PKG9 - "$C
-cd $PKG5 && makepkg -s
+[Service]
+ExecStart=/usr/bin/sddm
+Restart=always
+
+[Install]
+Alias=display-manager.service
+EOL
+sum2=$(md5sum sddm-plymouth.service |  awk -F ' ' '{print $1}')
+sed -i -e "s/$sum1/$sum2/g" PKGBUILD
+makepkg -s
 mv *.pkg.tar.xz ../../localrepo/x86_64
 cd ..
 
@@ -116,19 +116,19 @@ repo-add localrepo.db.tar.gz *
 echo
 echo -e $Y"[*] Appending Repo Config in Pacman file - "$C
 echo
-echo "[localrepo]" >> $DIR/iso/pacman.conf
-echo "SigLevel = Optional TrustAll" >> $DIR/iso/pacman.conf
-echo "Server = file://$DIR/localrepo/\$arch" >> $DIR/iso/pacman.conf
+echo "[localrepo]" >> $DIR/customiso/pacman.conf
+echo "SigLevel = Optional TrustAll" >> $DIR/customiso/pacman.conf
+echo "Server = file://$DIR/localrepo/\$arch" >> $DIR/customiso/pacman.conf
 echo
 
 ## Setting up oh-my-zsh
 echo -e $Y"[*] Setting Up Oh-My-Zsh - "$C
 echo
-cd $DIR/iso/airootfs/etc/skel && git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 .oh-my-zsh
-cp $DIR/pkgs/agnoster_alt.zsh-theme $DIR/iso/airootfs/etc/skel/.oh-my-zsh/custom/themes
-cp $DIR/iso/airootfs/etc/skel/.oh-my-zsh/templates/zshrc.zsh-template $DIR/iso/airootfs/etc/skel/.zshrc
-sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="agnoster_alt"/g' $DIR/iso/airootfs/etc/skel/.zshrc
-cat >> $DIR/iso/airootfs/etc/skel/.zshrc <<EOL
+cd $DIR/customiso/airootfs/etc/skel && git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 .oh-my-zsh
+cp $DIR/pkgs/agnoster_alt.zsh-theme $DIR/customiso/airootfs/etc/skel/.oh-my-zsh/custom/themes
+cp $DIR/customiso/airootfs/etc/skel/.oh-my-zsh/templates/zshrc.zsh-template $DIR/customiso/airootfs/etc/skel/.zshrc
+sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="agnoster_alt"/g' $DIR/customiso/airootfs/etc/skel/.zshrc
+cat >> $DIR/customiso/airootfs/etc/skel/.zshrc <<EOL
 # omz
 alias zshconfig="geany ~/.zshrc"
 alias ohmyzsh="thunar ~/.oh-my-zsh"
@@ -148,19 +148,19 @@ alias ga='git add'
 alias gc='git commit -m'
 alias gp='git push origin master'
 EOL
-cp -r $DIR/iso/airootfs/etc/skel/.oh-my-zsh $DIR/iso/airootfs/root && cp $DIR/iso/airootfs/etc/skel/.zshrc $DIR/iso/airootfs/root
+cp -r $DIR/customiso/airootfs/etc/skel/.oh-my-zsh $DIR/customiso/airootfs/root && cp $DIR/customiso/airootfs/etc/skel/.zshrc $DIR/customiso/airootfs/root
 echo
 echo -e $R"[*] Done."
 echo
 
 ## Changing ownership to root to avoid false permissions error
 echo -e $Y"[*] Making owner ROOT to avoid problems with false permissions."$C
-sudo chown -R root:root $DIR/iso/
+sudo chown -R root:root $DIR/customiso/
 echo
 
 echo -e $Y"[*] Cleaning Up... "$C
 cd $DIR/pkgs
-rm -rf $PKG1 $PKG2 $PKG3 $PKG4 $PKG5
+rm -rf $PKG1 $PKG2 $PKG3
 echo
 echo -e $R"[*] Setup Completed."
 echo
