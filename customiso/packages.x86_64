@@ -105,7 +105,6 @@ pv
 ttf-dejavu
 udisks2
 unrar
-unzipvim
 xdg-user-dirs
 zenity
 
@@ -115,10 +114,5 @@ virtualbox-guest-utils
 linux-headers
 
 ## AUR
-#plymouth
-#yay
-#rtl8821ce-dkms-git
-#atom-editor-beta-bin
-#code-git
-#pycharm-professional
-#discord
+plymouth
+yay
