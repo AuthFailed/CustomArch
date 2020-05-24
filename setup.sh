@@ -125,13 +125,11 @@ echo
 echo -e $Y"[*] Setting Up Oh-My-Zsh - "$C
 echo
 cd $DIR/customiso/airootfs/etc/skel && git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 .oh-my-zsh
-cp $DIR/pkgs/agnoster_alt.zsh-theme $DIR/customiso/airootfs/etc/skel/.oh-my-zsh/custom/themes
 cp $DIR/customiso/airootfs/etc/skel/.oh-my-zsh/templates/zshrc.zsh-template $DIR/customiso/airootfs/etc/skel/.zshrc
-sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="agnoster_alt"/g' $DIR/customiso/airootfs/etc/skel/.zshrc
 cat >> $DIR/customiso/airootfs/etc/skel/.zshrc <<EOL
 # omz
-alias zshconfig="geany ~/.zshrc"
-alias ohmyzsh="thunar ~/.oh-my-zsh"
+alias zshconfig="nano ~/.zshrc"
+alias ohmyzsh="nano ~/.oh-my-zsh"
 
 # ls
 alias l='ls -lh'
